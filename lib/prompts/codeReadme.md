@@ -25,11 +25,11 @@ Un acteur Goblin n'utilise pas de classes pour sa définition (legacy codebase).
 Un acteur Goblin exposait historiquement des "quêtes" (fonctions ou générateurs) pouvant déclencher une mutation d'état via un dispatch, qui appelait le code de mutation (pattern redux).
 Un acteur Elf expose des "quêtes" sous la forme de méthodes de classes.
 
-Un acteur singleton expose une quête "boot" et/ou "init".
+Un acteur singleton expose une quête "boot" et/ou "init" (ces quêtes sont appelées une seule fois).
 Un acteur instanciable expose toujours une quête "create" et peut optionellement exposer une quête "delete".
 Un acteur peut avoir une méthode "dispose" (qui n'est pas une quête) et qui permet de fermer proprement les handles lors de la fermeture de l'application.
 
-Dans tes exemples, montre uniquement l'instanciation de type Elf, par exemple : `const actor = await new Actor(this).create(actorId, sessionId);`.
+Dans tes exemples, montre uniquement l'instanciation de type Elf, par exemple : `const actor = await new Actor(this).create(actorId, sessionId);` et `const actor = new ActorAlone(this);`.
 Évite de montrer l'instanciation via le système quest : `await this.quest.create(actorNamespace, {actorId, sessionId, ...});`.
 Les classes `Elf` et `Elf.Alone` ne peuvent pas être instanciées directement (`new Elf` par exemple, est interdit).
 
