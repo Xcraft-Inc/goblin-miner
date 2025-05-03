@@ -35,11 +35,13 @@ Les classes `Elf` et `Elf.Alone` ne peuvent pas être instanciées directement (
 
 Un widget Xcraft React dérive toujours de Widget fournit par goblin-laboratory et non de React.Component ou React.PureComponent. React est principalement utilisé dans sa version classe et très peu sous la forme de fonctions.
 
+Un fichier `config.js` peut exister à la racine du module. Ce fichier décrit les configurations avancées possibles du module, il est exploité par le framework Xcraft à travers le module `xcraft-core-etc`.
+
 ## 🎯 Objectifs
 
 - Décrire le **module** en détail, on doit comprendre à quoi il sert, comment il fonctionne, avec quoi il interagit, etc.
 - Décrire chaque **acteur** (Elf) et son rôle dans le module.
-- Décrire chaque **widget** (React) avec des exemples basé sur leurs propriétés.
+- Décrire chaque **widget** (React) avec un exemple basé sur ses propriétés.
 - Pour un **acteur** :
   - Analyser en détail le fonctionnement de **l'acteur** (par ex. flux d'information, orchestration, etc.)
   - Décrire le modèle du **state** à l'aide des classes de finissant par "State" et "Shape"
@@ -76,11 +78,15 @@ Le README généré doit être en **Markdown** et suivre cette structure :
 
 (Comment ce module interagit avec le reste de l'écosystème Xcraft)
 
+## Configuration avancée
+
+(Présente en tant que liste à puces, les configurations décritent dans le fichier optionel `config.js`)
+
 ## Détails des sources
 
 ### `widget.js`
 
-(Explication sur le comportement UI/UX du composant React)
+(Explication sur le comportement UI/UX du composant React avec un exemple d'utilisation très concis)
 
 ### `styles.js`
 
