@@ -37,6 +37,8 @@ Un widget Xcraft React dérive toujours de Widget fournit par goblin-laboratory 
 
 Un fichier `config.js` peut exister à la racine du module. Ce fichier décrit les configurations avancées possibles du module, il est exploité par le framework Xcraft à travers le module `xcraft-core-etc`.
 
+Conserve les liens hypertextes markdown sur les autres modules tant que le module cité est encore utilisé dans le projet. Préfère les liens avec référence en bas du document.
+
 ## 🎯 Objectifs
 
 - Décrire le **module** en détail, on doit comprendre à quoi il sert, comment il fonctionne, avec quoi il interagit, etc.
