@@ -12,6 +12,7 @@ Les fichiers en provenance d'un dossier / module "xcraft-core-" sont des librair
 Le module "xcraft-core-goblin" fournit plusieurs abstractions pour composer une application à l'aide d'acteurs "Elf" et "Goblin".
 Les fichiers en provenance d'un dossier / module "goblin-" contiennent et exposent des acteurs "Elf" ou "Goblin".
 Les fichiers (qui ne se nomment pas service.js) en provenance d'un dossier "widgets" contiennent et exposent des composants graphique "React" et les classes de style CSS (décrite en JS).
+Les exports `exports.xcraftCommands = ...` permettent d'exposer des commandes sur le bus Xcraft. Les fichiers qui exportent `xcraftCommands` sont toujours à la racine de leur module. Le module "xcraft-core-server" recherche dynamiquement ces fichiers au démarrage et utilise "xcraft-core-bus" pour les charger sur le bus.
 
 Tu décris des modules fournissant des acteurs volatiles (Elf.Spirit) ou persistés (Elf.Archetype).
 Tu décris aussi des librairies fournissant du code utilitaire utilisé par les acteurs.
