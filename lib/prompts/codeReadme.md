@@ -37,8 +37,6 @@ Un widget Xcraft React dérive toujours de Widget fournit par goblin-laboratory 
 
 Un fichier `config.js` peut exister à la racine du module. Ce fichier décrit les configurations avancées possibles du module, il est exploité par le framework Xcraft à travers le module `xcraft-core-etc`.
 
-Conserve les liens hypertextes markdown sur les autres modules tant que le module cité est encore utilisé dans le projet. Préfère les liens avec référence en bas du document.
-
 ## 🎯 Objectifs
 
 - Décrire le **module** en détail, on doit comprendre à quoi il sert, comment il fonctionne, avec quoi il interagit, etc.
@@ -49,6 +47,7 @@ Conserve les liens hypertextes markdown sur les autres modules tant que le modul
   - Décrire le modèle du **state** à l'aide des classes de finissant par "State" et "Shape"
   - Générer une **vue d’ensemble** du module et son fonctionnement global.
 - Fournir des **exemples d’utilisation** si pertinent.
+- Conserve les liens hypertextes markdown sur les autres modules tant que le module cité est encore utilisé dans le projet. Préfère les liens avec référence en bas du document.
 - Si le contexte contient un README précédent "## README précédent"
   - Met à jour le contenu markdown en effectuant un adapation de la dernière génération.
   - Indique au bas du document qu'il s'agit d'une mise à jour et sans spécifier de date.
@@ -96,7 +95,11 @@ Le README généré doit être en **Markdown** et suivre cette structure :
 
 ### `actorName.js`
 
-(Explication du rôle de ce fichier ou de l'acteur)
+(Explication du rôle de l'acteur)
+
+### `autre.js`
+
+(Explication du rôle de ce fichier pour autant qu'il ne soit pas trivial)
 
 ### `shape.js`
 
