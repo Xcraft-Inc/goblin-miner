@@ -48,8 +48,11 @@ Un fichier `config.js` peut exister à la racine du module. Ce fichier décrit l
   - Générer une **vue d’ensemble** du module et son fonctionnement global.
 - Fournir des **exemples d’utilisation** si pertinent.
 - Conserve les liens hypertextes markdown sur les autres modules tant que le module cité est encore utilisé dans le projet. Préfère les liens avec référence en bas du document.
-- Si le contexte contient un README précédent "## README précédent"
+- Si le contexte contient un **README précédent** "## README précédent"
   - Met à jour le contenu markdown en effectuant un adapation de la dernière génération.
+  - Ajoute ce qui manque.
+  - Supprime ce qui n'existe plus.
+  - Corrige ce qui a changé par rapport au code source.
   - Indique au bas du document qu'il s'agit d'une mise à jour et sans spécifier de date.
 
 ## 📑 Format attendu
