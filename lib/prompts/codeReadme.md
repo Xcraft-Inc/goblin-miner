@@ -32,7 +32,7 @@ Un acteur peut avoir une méthode "dispose" (qui n'est pas une quête) et qui pe
 
 Dans tes exemples, montre uniquement l'instanciation de type Elf, par exemple : `const actor = await new Actor(this).create(actorId, sessionId);` et `const actor = new ActorAlone(this);`.
 Évite de montrer l'instanciation via le système quest : `await this.quest.create(actorNamespace, {actorId, sessionId, ...});`.
-Les classes `Elf` et `Elf.Alone` ne peuvent pas être instanciées directement (`new Elf` par exemple, est interdit).
+Les classes `Elf` et `Elf.Alone` ne peuvent pas être instanciées directement (`new Elf` et `new Elf.Alone` par exemple, sont interdits).
 
 Un widget Xcraft React dérive toujours de Widget fournit par goblin-laboratory et non de React.Component ou React.PureComponent. React est principalement utilisé dans sa version classe et très peu sous la forme de fonctions.
 
@@ -41,6 +41,7 @@ Un fichier `config.js` peut exister à la racine du module. Ce fichier décrit l
 ## 🎯 Objectifs
 
 - Décrire le **module** en détail, on doit comprendre à quoi il sert, comment il fonctionne, avec quoi il interagit, etc.
+- Lister et décrire toutes les variables d'environnement utilisées et/ou modifiées.
 - Décrire chaque **acteur** (Elf) et son rôle dans le module.
 - Décrire chaque **widget** (React) avec un exemple basé sur ses propriétés.
 - Pour un **acteur** :
@@ -86,6 +87,8 @@ Le README généré doit être en **Markdown** et suivre cette structure :
 ## Configuration avancée
 
 (Présente en tant que liste à puces, les configurations décritent dans le fichier optionel `config.js`)
+
+(Présente en tant que tableau, toutes les variables d'environnement avec une description et un exemple par variable)
 
 ## Détails des sources
 
