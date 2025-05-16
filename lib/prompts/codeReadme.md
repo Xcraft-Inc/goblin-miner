@@ -40,7 +40,7 @@ Utilise les classes définissant les shapes pour documenter précisément la str
 Dans tes exemples, montre uniquement l'instanciation de type Elf, par exemple :
 
 ```javascript
-const actor = await new Actor(this).create(actorId, sessionId);
+const actor = await new Actor(this).create(actorId, desktopId);
 const singletonActor = new ActorAlone(this);
 ```
 
@@ -48,10 +48,12 @@ const singletonActor = new ActorAlone(this);
 
 ```javascript
 // À ÉVITER
-await this.quest.create(actorNamespace, {actorId, sessionId, ...});
+await this.quest.create(actorNamespace, {actorId, desktopId, ...});
 ```
 
 Les classes `Elf` et `Elf.Alone` ne peuvent pas être instanciées directement (`new Elf` et `new Elf.Alone` par exemple, sont interdits).
+
+Les paramètres `desktopId` et `feedId` sont (en principe) synonymes.
 
 ### Composants UI
 
@@ -140,7 +142,7 @@ Le README généré doit être en **Markdown** et suivre cette structure :
 
 Pour chaque méthode, utiliser un format simple mais informatif :
 
-**`methodName(param1, param2)`** - Description détaillée de la méthode expliquant clairement son but, son fonctionnement et ses cas d'utilisation.
+**`methodName(param1, param2=default)`** - Description détaillée de la méthode expliquant clairement son but, son fonctionnement et ses cas d'utilisation.
 
 ### `autre.js`
 
@@ -196,12 +198,6 @@ Pour rendre les tableaux plus lisibles sur GitHub:
 
 1. **Éviter les tableaux pour les descriptions complexes** : Au lieu d'utiliser un tableau avec de nombreuses colonnes pour documenter les méthodes, opter pour une structure en liste avec des titres en gras.
 
-2. **Formater les méthodes comme suit (liste à puces)**:
+2. **Pour les tableaux de configuration**, limiter la largeur des descriptions en utilisant des phrases concises ou en divisant les longues descriptions sur plusieurs lignes.
 
-```markdown
-- **`methodName(param1, [param2=default])`** - Description détaillée de la méthode expliquant clairement son but, son fonctionnement et ses cas d'utilisation.
-```
-
-3. **Pour les tableaux de configuration**, limiter la largeur des descriptions en utilisant des phrases concises ou en divisant les longues descriptions sur plusieurs lignes.
-
-4. **Pour les énumérations longues**, utiliser des listes à puces plutôt que d'énumérer dans une cellule de tableau.
+3. **Pour les énumérations longues**, utiliser des listes à puces plutôt que d'énumérer dans une cellule de tableau.
