@@ -3,9 +3,8 @@
 - Garder une vision haut-niveau de flux applicatif
 - Toujours fournir des diagrammes de séquence textuels si nécessaire
 - Décrire le flux de démarrage de l'application
-- Décrire les fonctionnalités de l'application disponible au runtime
+- Décrire les fonctionnalités de l'application de manière détaillée
 - Décrire les interactions avec des services externes :
-  - Xcraft
   - API REST
   - Websocket (par ex. SignalR)
 - Déctecter les spécialités liée aux variables d'environnements
@@ -38,7 +37,7 @@ Le README généré doit être en **Markdown** et suivre cette structure :
 
 ## Interactions avec des services externes
 
-(Comment ce module interagit avec le reste de l'écosystème (Xcraft / API Rest / Websocket etc ...)
+(Comment ce module interagit avec le reste de l'écosystème (API Rest / Websocket etc ...)
 
 ### Variables d'environnement
 
