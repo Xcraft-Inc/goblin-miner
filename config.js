@@ -41,7 +41,7 @@ module.exports = [
     type: 'input',
     name: 'modules.doc',
     message: 'Modules and filters',
-    default: {},
+    default: [],
   },
   {
     type: 'input',
