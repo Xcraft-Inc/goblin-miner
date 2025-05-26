@@ -4,6 +4,7 @@
 - Toujours fournir des diagrammes de séquence textuels si nécessaire
 - Décrire le flux de démarrage de l'application
 - Décrire les fonctionnalités de l'application de manière détaillée
+  - Descriptions de tous les acteurs et de leur rôle
 - Décrire les interactions avec des services externes :
   - API REST
   - Websocket (par ex. SignalR)
