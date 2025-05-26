@@ -7,6 +7,7 @@
 - Décrire avec détail le fonctionnement du vecteur de licences
 - Décrire le comportement des jetons de licences en liens avec les modules en cours d'execution
 - Décrire l'impact (en-ligne, hors-ligne) sur le renouvellement des jetons de licences
+- Ne détails pas les algorithmes avec des exemple de codes.
 - Toujours fournir des diagrammes de séquence textuels si nécessaire
 - Si le contexte contient un **README précédent** "## README précédent"
   - Mettre à jour le contenu markdown en effectuant une adaptation de la dernière génération.
