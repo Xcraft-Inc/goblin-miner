@@ -3,8 +3,10 @@
 - Garder une vision haut-niveau de flux applicatif
 - Toujours fournir des diagrammes de séquence textuels si nécessaire
 - Décrire le flux de démarrage de l'application
+  - Détailler tous les appels sous la forme de pseudo-code
 - Décrire les fonctionnalités de l'application de manière détaillée
   - Descriptions de tous les acteurs et de leur rôle
+- Décrire les interactions avec l'utilisateur (popups, notifications, erreurs, ...)
 - Décrire les interactions avec des services externes :
   - API REST
   - Websocket (par ex. SignalR)
@@ -30,15 +32,19 @@ Le README généré doit être en **Markdown** et suivre cette structure :
 
 ## Flux de démarrage
 
-(Expliquer le déroulement et l'orchestration du démarrage de l'application)
+(Expliquer le déroulement et l'orchestration du démarrage de l'application et produire du pseudo-code de **tous les appels**)
 
 ## Fonctionnalités
 
 (Explication détaillée des fonctionnalités de l'application)
 
+## Interactions avec l'utilisateur
+
+(Comment ce module interagit avec l'utilisateur via les popups, les notifications, les erreurs, ...)
+
 ## Interactions avec des services externes
 
-(Comment ce module interagit avec le reste de l'écosystème (API Rest / Websocket etc ...)
+(Comment ce module interagit avec le reste de l'écosystème (API Rest / Websocket etc ...))
 
 ### Variables d'environnement
 
