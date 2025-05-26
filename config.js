@@ -61,4 +61,10 @@ module.exports = [
     message: 'Enable to generate a README for the module',
     default: false,
   },
+  {
+    type: 'input',
+    name: 'instruct.doc',
+    message: 'Filename for specific instructions',
+    default: null,
+  },
 ];
