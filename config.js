@@ -45,24 +45,6 @@ module.exports = [
   },
   {
     type: 'input',
-    name: 'modules.readme',
-    message: 'Modules',
-    default: [],
-  },
-  {
-    type: 'input',
-    name: 'generate.doc',
-    message: 'Enable to generate a document by file',
-    default: false,
-  },
-  {
-    type: 'input',
-    name: 'generate.readme',
-    message: 'Enable to generate a README for the module',
-    default: false,
-  },
-  {
-    type: 'input',
     name: 'instruct.doc',
     message: 'Filename for specific instructions',
     default: undefined,
