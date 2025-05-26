@@ -65,6 +65,12 @@ module.exports = [
     type: 'input',
     name: 'instruct.doc',
     message: 'Filename for specific instructions',
-    default: null,
+    default: undefined,
+  },
+  {
+    type: 'input',
+    name: 'excludes.doc',
+    message: 'Name exclusions',
+    default: [],
   },
 ];
