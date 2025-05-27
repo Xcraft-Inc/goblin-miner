@@ -49,10 +49,4 @@ module.exports = [
     message: 'Filename for specific instructions',
     default: undefined,
   },
-  {
-    type: 'input',
-    name: 'excludes.doc',
-    message: 'Name exclusions',
-    default: [],
-  },
 ];
