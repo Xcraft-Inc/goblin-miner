@@ -31,6 +31,10 @@ Le README généré doit être en **Markdown** et suivre cette structure :
 
 (Description concise du module et de son objectif principal)
 
+## Sommaire
+
+(Sommaire de tous les chapitres de second niveau : `##`)
+
 ## Structure du module
 
 (Expliquer brièvement l'architecture et les principaux modules, fonctions et acteurs)
