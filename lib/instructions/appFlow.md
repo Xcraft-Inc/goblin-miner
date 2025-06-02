@@ -2,8 +2,9 @@
 
 - Garder une vision haut-niveau de flux applicatif
 - Toujours fournir des diagrammes de séquence textuels (mermaid) si nécessaire
+- Ne détail pas les algorithmes avec des exemple de codes
 - Décrire le flux de démarrage de l'application
-  - Détailler tous les appels sous la forme de pseudo-code
+  - Utilise des diagrammes si pertinant, sinon préfère une liste
 - Décrire les fonctionnalités de l'application de manière détaillée
   - Descriptions de tous les acteurs et de leur rôle
 - Décrire les interactions avec l'utilisateur (popups, notifications, erreurs, ...)
