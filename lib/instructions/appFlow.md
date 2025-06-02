@@ -1,7 +1,7 @@
 ## 🎯 Objectifs
 
 - Garder une vision haut-niveau de flux applicatif
-- Toujours fournir des diagrammes de séquence textuels si nécessaire
+- Toujours fournir des diagrammes de séquence textuels (mermaid) si nécessaire
 - Décrire le flux de démarrage de l'application
   - Détailler tous les appels sous la forme de pseudo-code
 - Décrire les fonctionnalités de l'application de manière détaillée
