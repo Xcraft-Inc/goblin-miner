@@ -38,15 +38,15 @@ module.exports = [
     default: null,
   },
   {
-    type: 'input',
+    type: 'list',
     name: 'modules.doc',
     message: 'Modules and filters',
     default: [],
   },
   {
-    type: 'input',
-    name: 'instruct.doc',
-    message: 'Filename for specific instructions',
-    default: undefined,
+    type: 'list',
+    name: 'instructs.doc',
+    message: 'Filenames for specific instructions',
+    default: [],
   },
 ];
