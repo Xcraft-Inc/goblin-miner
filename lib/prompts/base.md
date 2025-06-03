@@ -37,14 +37,14 @@ Utilise les classes définissant les shapes pour documenter précisément la str
 
 #### Règles pour les exemples de code
 
-Dans tes exemples, montre uniquement l'instanciation de type Elf, par exemple :
+Dans tes exemples, montre de préférence l'instanciation Elf (**uniquement avec les acteur de type Elf**), par exemple :
 
 ```javascript
 const actor = await new Actor(this).create(actorId, desktopId);
 const singletonActor = new ActorAlone(this);
 ```
 
-Évite de montrer l'instanciation via le système quest (sauf si l'acteur concerné est un acteur de type Goblin) :
+Évite de montrer l'instanciation via le système quest (**sauf si l'acteur concerné est un acteur de type Goblin**) :
 
 ```javascript
 // À ÉVITER
