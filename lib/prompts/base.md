@@ -32,7 +32,7 @@ Utilise les classes définissant les shapes pour documenter précisément la str
 #### Cycle de vie des acteurs
 
 - Un acteur singleton expose une quête "boot" et/ou "init" (ces quêtes sont appelées une seule fois).
-- Un acteur instanciable expose toujours une quête "create" et peut optionnellement exposer une quête "delete".
+- Un acteur instanciable expose toujours une quête "create" (qui correspond au constructeur de l'instance) et peut optionnellement exposer une quête "delete" (qui correspond au destructeur de l'instance).
 - Un acteur peut avoir une méthode "dispose" (qui n'est pas une quête) et qui permet de fermer proprement les handles lors de la fermeture de l'application.
 
 #### Règles pour les exemples de code
@@ -44,7 +44,7 @@ const actor = await new Actor(this).create(actorId, desktopId);
 const singletonActor = new ActorAlone(this);
 ```
 
-Évite de montrer l'instanciation via le système quest :
+Évite de montrer l'instanciation via le système quest (sauf si l'acteur concerné est un acteur de type Goblin) :
 
 ```javascript
 // À ÉVITER
