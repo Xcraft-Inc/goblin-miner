@@ -33,7 +33,7 @@ Le README généré doit être en **Markdown** et suivre cette structure :
 
 ## Sommaire
 
-(Sommaire de tous les chapitres de second niveau : `##`)
+(Sommaire (liste à puces) de tous les chapitres de second niveau : `##`)
 
 ## Structure du module
 
@@ -46,6 +46,7 @@ Le README généré doit être en **Markdown** et suivre cette structure :
 ## Exemples d'utilisation
 
 (Montrer quelques cas d'utilisation avec les acteurs - préférer la qualité à la quantité)
+(Faire attention à utiliser la syntaxe Goblin pour la création d'un acteur quand l'acteur n'est pas de type Elf)
 
 ## Interactions avec d'autres modules
 
@@ -60,6 +61,8 @@ Le README généré doit être en **Markdown** et suivre cette structure :
 (Présenter sous forme de tableau avec colonnes `Variable`, `Description`, `Exemple`, `Valeur par défaut`)
 
 ## Détails des sources
+
+(Ne liste pas le fichier config.js car il est déjà présenté dans le chapitre "Configuration avancée")
 
 ### `widget.js`
 
@@ -94,6 +97,10 @@ Pour chaque méthode, utiliser un format simple mais informatif :
 ### Fichiers spéciaux (workers, backends, etc.)
 
 (Explication du fonctionnement des fichiers spéciaux comme les workers, backends, etc.)
+
+## À faire, à corriger, ...
+
+(Présenter les TODO, FIXME, XXX sous forme de tableau)
 ```
 
 ## Instructions spéciales pour les types de modules

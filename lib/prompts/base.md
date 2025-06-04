@@ -51,6 +51,8 @@ const singletonActor = new ActorAlone(this);
 await this.quest.create(actorNamespace, {actorId, desktopId, ...});
 ```
 
+Attention, si un exemple utilise l'écriture `new Actor(this).create(actorId, desktopId)` et que tu constates que l'acteur en question n'est pas de type Elf (car il export avec `Goblin.configure`), transforme alors en `this.quest.create(actorNamespace, {actorId, desktopId, ...})`.
+
 Les classes `Elf` et `Elf.Alone` ne peuvent pas être instanciées directement (`new Elf` et `new Elf.Alone` par exemple, sont interdits).
 
 Les paramètres `desktopId` et `feedId` sont (en principe) synonymes.
