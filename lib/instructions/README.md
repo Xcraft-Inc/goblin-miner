@@ -83,9 +83,9 @@ Le README généré doit être en **Markdown** et suivre cette structure :
 
 #### Méthodes publiques
 
-Pour chaque méthode, utiliser un format simple mais informatif :
+Liste à puces; pour chaque méthode, utiliser un format simple mais informatif :
 
-**`methodName(param1, param2=default)`** - Description détaillée de la méthode expliquant clairement son but, son fonctionnement et ses cas d'utilisation.
+- **`methodName(param1, param2=default)`** — Description détaillée de la méthode expliquant clairement son but, son fonctionnement et ses cas d'utilisation.
 
 ### `autre.js`
 
