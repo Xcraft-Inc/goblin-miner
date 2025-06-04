@@ -94,7 +94,7 @@ await codeMiner.generate('goblin-workshop', 'README.md');
 | inference.temperature | Température pour l'inférence (contrôle la créativité, 0.0-1.0) | number | null              |
 | inference.seed        | Graine pour la reproductibilité des résultats                  | number | null              |
 | modules.doc           | Liste des modules à analyser                                   | array  | []                |
-| instruct.doc          | Nom du fichier d'instructions spécifiques                      | string | undefined         |
+| instructs.doc         | Noms des fichiers d'instructions spécifiques                   | array  | []                |
 
 ### Variables d'environnement
 
@@ -110,13 +110,9 @@ Point d'entrée principal qui expose les commandes Xcraft pour l'acteur `AppMine
 
 Point d'entrée qui expose les commandes Xcraft pour l'acteur `CodeMiner`. Similaire à `appMiner.js`, il utilise `Elf.birth()` pour l'enregistrement.
 
-### `config.js`
-
-Fichier de configuration qui définit les options configurables du module via `xcraft-core-etc`. Il spécifie les paramètres de l'agent d'IA, les options d'inférence, et les modules à traiter.
-
 ### `lib/appMiner.js`
 
-Acteur singleton responsable de l'orchestration du processus de génération de documentation. Il charge la configuration, initialise le CodeMiner et traite tous les modules configurés.
+Acteur singleton responsable de l'orchestration du processus de génération de documentation. Il charge la configuration, initialise le CodeMiner et traite tous les modules configurés selon une matrice modules × fichiers d'instructions.
 
 #### État et modèle de données
 
@@ -132,7 +128,7 @@ class AppMinerShape {
 
 #### Méthodes publiques
 
-**`init()`** - Méthode d'initialisation principale qui orchestre tout le processus de génération de documentation. Elle charge la configuration depuis `xcraft-core-etc`, crée une instance de `CodeMiner`, lance la génération pour tous les modules configurés, puis déclenche l'arrêt de l'application via `this.quest.cmd('shutdown')`.
+**`init()`** - Méthode d'initialisation principale qui orchestre tout le processus de génération de documentation. Elle charge la configuration depuis `xcraft-core-etc`, crée une instance de `CodeMiner`, lance la génération pour tous les modules configurés en combinaison avec tous les fichiers d'instructions spécifiés, puis déclenche l'arrêt de l'application via `this.quest.cmd('shutdown')`.
 
 ### `lib/codeMiner.js`
 
@@ -159,7 +155,7 @@ class CodeMinerShape {
 
 **`create(id, desktopId, projectPath, provider, model, host, authKey, temperature, seed)`** - Initialise l'instance avec les paramètres d'IA et le chemin du projet. Configure l'agent d'IA avec les paramètres fournis et prépare l'instance pour la génération de documentation.
 
-**`loadModule(goblinName, instructFile)`** - Charge et filtre les fichiers source d'un module selon les règles d'exclusion définies dans `.mignore`. Retourne la liste des fichiers à analyser en excluant automatiquement les `node_modules`, fichiers `eslint.*`, et autres fichiers non pertinents.
+**`loadModule(goblinName, instructFile)`** - Charge et filtre les fichiers source d'un module selon les règles d'exclusion définies dans `.mignore`. Retourne la liste des fichiers à analyser en excluant automatiquement les `node_modules`, fichiers `eslint.*`, et autres fichiers non pertinents. Supporte les sections conditionnelles dans `.mignore` basées sur le fichier d'instruction.
 
 **`generate(module, instructFile = 'README.md')`** - Génère la documentation pour un module spécifique. Combine les prompts de base, les instructions spécifiques, le code source et la documentation précédente (si elle existe) pour créer un prompt complet envoyé à l'agent d'IA.
 
@@ -241,7 +237,9 @@ La documentation générée est sauvegardée dans :
 Le module utilise un système de redirection pour déterminer où sauvegarder la documentation :
 
 1. **Par défaut** : `doc/autogen/[module]/[instructFile]`
-2. **Avec redirection** : Si un fichier `[name].redirect` existe dans `doc/autogen/[module]/`, la documentation est sauvegardée directement dans `lib/[module]/[instructFile]`
+2. **Avec redirection** : Si un fichier `[name].redirect` existe dans `doc/autogen/[module]/`, la documentation est sauvegardée directement dans le module source :
+   - Pour `README.*` : `lib/[module]/[instructFile]`
+   - Pour les autres fichiers : `lib/[module]/doc/[instructFile]`
 
 Cette fonctionnalité permet de maintenir la documentation directement dans le module source si souhaité.
 
