@@ -2,6 +2,7 @@
 
 - Décrire le **module** en détail, on doit comprendre à quoi il sert, comment il fonctionne, avec quoi il interagit, etc.
 - Lister et décrire toutes les variables d'environnement utilisées et/ou modifiées dans un tableau avec colonnes `Variable`, `Description`, `Exemple` et `Valeur par défaut`.
+- Lister et décrire tous les FIXME, TODO, XXX, etc. dans un tableau avec colonnes `Fichier`, `Ligne`, `Type` et `Description`.
 - Décrire chaque **acteur** (Elf) et son rôle dans le module.
 - Décrire chaque **widget** (React) avec un exemple basé sur ses propriétés.
 - Pour un **acteur** :
@@ -98,9 +99,9 @@ Pour chaque méthode, utiliser un format simple mais informatif :
 
 (Explication du fonctionnement des fichiers spéciaux comme les workers, backends, etc.)
 
-## À faire, à corriger, ...
+### À faire, à corriger, ...
 
-(Présenter les TODO, FIXME, XXX sous forme de tableau)
+(Présenter les TODO, FIXME, XXX sous forme de tableau avec colonnes `Fichier`, `Ligne`, `Type`, `Description`)
 ```
 
 ## Instructions spéciales pour les types de modules
