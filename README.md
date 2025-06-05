@@ -61,6 +61,7 @@ const codeMiner = await new CodeMiner(this).create(
   'codeMiner@myApp',
   feedId,
   '/path/to/project',
+  'xcraft', // type de projet
   'openai', // provider
   'gpt-4', // model
   'https://api.openai.com/v1', // host
@@ -73,13 +74,22 @@ const codeMiner = await new CodeMiner(this).create(
 await codeMiner.generate('goblin-workshop', 'README.md');
 ```
 
+### Utilisation avec arguments en ligne de commande
+
+Le module supporte des arguments spéciaux via `xcraft-core-host` :
+
+- `-t` : Type de projet (par défaut 'xcraft')
+- `-k` : Clé d'authentification
+- `-i` : Chemin vers un module spécifique
+- `-o` : Chemin vers un fichier d'instruction spécifique
+
 ## Interactions avec d'autres modules
 
 - **[goblin-agents]** : Utilise `AiAgent` pour communiquer avec les modèles d'IA
 - **[xcraft-core-etc]** : Charge la configuration du module
 - **[xcraft-core-goblin]** : Fournit l'infrastructure des acteurs Elf
-- **[xcraft-core-host]** : Récupère le chemin du projet et des ressources
-- **[goblin-warehouse]** : Dépendance pour la gestion des données (non utilisée directement dans le code fourni)
+- **[xcraft-core-host]** : Récupère le chemin du projet et des ressources, ainsi que les arguments d'application
+- **[goblin-warehouse]** : Dépendance pour la gestion des données
 - **fs-extra** : Manipulation des fichiers et répertoires
 - **[xcraft-core-stones]** : Définition des types pour les shapes d'état
 
@@ -128,7 +138,9 @@ class AppMinerShape {
 
 #### Méthodes publiques
 
-**`init()`** - Méthode d'initialisation principale qui orchestre tout le processus de génération de documentation. Elle charge la configuration depuis `xcraft-core-etc`, crée une instance de `CodeMiner`, lance la génération pour tous les modules configurés en combinaison avec tous les fichiers d'instructions spécifiés, puis déclenche l'arrêt de l'application via `this.quest.cmd('shutdown')`.
+- **`init()`** — Méthode d'initialisation principale qui orchestre tout le processus de génération de documentation. Elle charge la configuration depuis `xcraft-core-etc`, traite les arguments d'application via `xcraft-core-host`, crée une instance de `CodeMiner`, lance la génération pour tous les modules configurés en combinaison avec tous les fichiers d'instructions spécifiés, puis déclenche l'arrêt de l'application via `this.quest.cmd('shutdown')`.
+
+- **`main()`** — Méthode principale qui contient la logique de traitement. Elle gère la configuration, les arguments en ligne de commande, l'instanciation du CodeMiner et l'exécution de la génération de documentation pour chaque combinaison module/fichier d'instruction.
 
 ### `lib/codeMiner.js`
 
@@ -150,37 +162,48 @@ class CodeMinerShape {
 
 - `_projectPath` : Chemin vers le projet à analyser
 - `_agentDef` : Configuration de l'agent d'IA (provider, model, host, headers, options)
+- `_type` : Type de projet ('xcraft', 'dotnet', etc.)
 
 #### Méthodes publiques
 
-**`create(id, desktopId, projectPath, provider, model, host, authKey, temperature, seed)`** - Initialise l'instance avec les paramètres d'IA et le chemin du projet. Configure l'agent d'IA avec les paramètres fournis et prépare l'instance pour la génération de documentation.
+- **`create(id, desktopId, projectPath, type, provider, model, host, authKey, temperature, seed)`** — Initialise l'instance avec les paramètres d'IA et le chemin du projet. Configure l'agent d'IA avec les paramètres fournis et prépare l'instance pour la génération de documentation.
 
-**`loadModule(goblinName, instructFile)`** - Charge et filtre les fichiers source d'un module selon les règles d'exclusion définies dans `.mignore`. Retourne la liste des fichiers à analyser en excluant automatiquement les `node_modules`, fichiers `eslint.*`, et autres fichiers non pertinents. Supporte les sections conditionnelles dans `.mignore` basées sur le fichier d'instruction.
+- **`loadModule(module, instructFileName)`** — Charge et filtre les fichiers source d'un module selon les règles d'exclusion définies dans `.mignore`. Retourne la liste des fichiers à analyser en excluant automatiquement les `node_modules`, fichiers `eslint.*`, et autres fichiers non pertinents. Supporte les sections conditionnelles dans `.mignore` basées sur le fichier d'instruction.
 
-**`generate(module, instructFile = 'README.md')`** - Génère la documentation pour un module spécifique. Combine les prompts de base, les instructions spécifiques, le code source et la documentation précédente (si elle existe) pour créer un prompt complet envoyé à l'agent d'IA.
+- **`generate(module, instructFile = 'README.md')`** — Génère la documentation pour un module spécifique. Combine les prompts de base, les instructions spécifiques, le code source et la documentation précédente (si elle existe) pour créer un prompt complet envoyé à l'agent d'IA.
 
 #### Fonctions utilitaires
 
-**`loadPrompt(fileName)`** - Charge un prompt de base depuis le répertoire `lib/prompts/`.
+**`loadPrompt(fileName)`** — Charge un prompt de base depuis le répertoire `lib/prompts/`.
 
-**`loadInstruction(libPath, fileName)`** - Charge les instructions spécifiques selon une hiérarchie de priorité :
+**`loadInstruction(libPath, type, fileName)`** — Charge les instructions spécifiques selon une hiérarchie de priorité :
 
 1. Module cible : `lib/[module]/doc/autogen/instructions/[fileName]`
 2. Ressources de l'application : `resources/[fileName]`
-3. Module miner : `lib/goblin-miner/lib/instructions/[fileName]`
+3. Module miner : `lib/goblin-miner/lib/instructions/[type]/[fileName]`
+
+**`typeFilter(type, file)`** — Filtre les fichiers selon le type de projet :
+
+- **xcraft** : Exclut les fichiers non-JS, non-package.json, les node_modules et fichiers eslint
+- **dotnet** : Inclut uniquement les fichiers .cs, .csproj et .sln
 
 ### Processus de génération
 
 #### 1. Chargement des fichiers source
 
-Le `CodeMiner` analyse récursivement le répertoire `lib/[module]` et collecte :
+Le `CodeMiner` analyse récursivement le répertoire du module et collecte les fichiers selon le type de projet :
 
+**Pour les projets Xcraft** :
 - Tous les fichiers `.js`
 - Le fichier `package.json`
 - Les fichiers dans les dossiers `bin/`
 
-**Exclusions automatiques** :
+**Pour les projets .NET** :
+- Fichiers `.cs`
+- Fichiers `.csproj`
+- Fichiers `.sln`
 
+**Exclusions automatiques** :
 - Dossiers `node_modules`
 - Fichiers commençant par `eslint.`
 - Fichiers listés dans `.mignore` (si présent)
@@ -206,7 +229,6 @@ service.js
 ```
 
 **Règles d'exclusion** :
-
 - Les lignes vides et les commentaires (commençant par `#`) sont ignorés
 - Les entrées sans slash final excluent des fichiers spécifiques
 - Les entrées avec slash final excluent des répertoires entiers
@@ -215,9 +237,8 @@ service.js
 #### 3. Préparation du prompt
 
 Le système combine :
-
-- Un prompt de base (depuis `prompts/base.md`)
-- Des instructions spécifiques (depuis `instructions/[instructFile]`)
+- Un prompt de base (depuis `prompts/[type].md`)
+- Des instructions spécifiques (depuis `instructions/[type]/[instructFile]`)
 - Le code source de tous les fichiers du module
 - La documentation précédente (si elle existe)
 
@@ -228,16 +249,17 @@ Un agent d'IA (`AiAgent` de `goblin-agents`) analyse le prompt et génère la do
 #### 5. Sauvegarde
 
 La documentation générée est sauvegardée dans :
-
 - `doc/autogen/[module]/[instructFile]` (par défaut)
 - Ou `lib/[module]/[instructFile]` (si un fichier `.redirect` existe)
+- Ou le chemin absolu spécifié si `instructFile` est un chemin absolu
 
 ### Gestion des chemins de sauvegarde
 
 Le module utilise un système de redirection pour déterminer où sauvegarder la documentation :
 
-1. **Par défaut** : `doc/autogen/[module]/[instructFile]`
-2. **Avec redirection** : Si un fichier `[name].redirect` existe dans `doc/autogen/[module]/`, la documentation est sauvegardée directement dans le module source :
+1. **Chemin absolu** : Si `instructFile` est un chemin absolu, utilise ce chemin directement
+2. **Par défaut** : `doc/autogen/[module]/[instructFile]`
+3. **Avec redirection** : Si un fichier `[name].redirect` existe dans `doc/autogen/[module]/`, la documentation est sauvegardée directement dans le module source :
    - Pour `README.*` : `lib/[module]/[instructFile]`
    - Pour les autres fichiers : `lib/[module]/doc/[instructFile]`
 
