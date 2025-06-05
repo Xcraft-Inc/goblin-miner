@@ -1,6 +1,6 @@
 # Utilisation
 
-## Installation
+## Exécution
 
 Pour utiliser **xcraft-miner**, vous pouvez l'exécuter directement via npx ou bunx sans installation préalable :
 
@@ -94,7 +94,7 @@ Modules JavaScript qui définissent quels fichiers inclure ou exclure de l'analy
 
 #### Fichier `.mignore`
 
-Permet d'exclure des fichiers ou dossiers de l'analyse, similaire à `.gitignore`. Supporte également des sections conditionnelles avec la syntaxe `[nom-fichier.md]` pour appliquer des exclusions spécifiques selon le document généré.
+Permet d'exclure des fichiers ou dossiers de l'analyse. Supporte également des sections conditionnelles avec la syntaxe `[nom-fichier.md]` pour appliquer des exclusions spécifiques selon le document généré.
 
 Exemple de `.mignore` :
 

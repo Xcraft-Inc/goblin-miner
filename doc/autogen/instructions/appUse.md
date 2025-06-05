@@ -24,7 +24,7 @@ Le document généré doit être en **Markdown** et suivre cette structure :
 ```markdown
 # Utilisation
 
-## Installation
+## Exécution
 
 (Expliquer comment démarrer l'application avec npx ou bunx; l'application se nomme **xcraft-miner**)
 
@@ -34,7 +34,8 @@ Le document généré doit être en **Markdown** et suivre cette structure :
 
 ## Configurations
 
-(Expliquer comment configurer le module cible pour exploiter des prompts personnalisés, etc. avec cette utilisation en ligne de commande)
+(Expliquer comment configurer le module cible pour exploiter des prompts personnalisés)
+(Ne pas donner d'explication sur la redirection de sortie `.redirect`)
 
 ## Exemples
 
