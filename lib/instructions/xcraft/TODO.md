@@ -2,8 +2,8 @@
 
 - Lister et décrire tous les `FIXME`, `TODO`, `XXX`, etc. (qui sont sous la forme de commentaires dans le code) dans un tableau avec colonnes `Fichier`, `Type` et `Description`.
   - Trouver tous les `FIXME`, `TODO`, `XXX`, etc.
-  - Remplacer le commentaire de `FIXME`, `TODO`, `XXX`, etc. original par un commentaire explicatif qui donne également le nom de la fonction (si possible)
-  - Trier le tableau avec d'abord les entrées `XXX`, puis les entrées `FIXME` et enfin les entrées `TODO`
+  - Remplacer le commentaire de `FIXME`, `TODO`, `XXX`, etc. par un commentaire explicatif qui donne également le nom de la fonction (si possible)
+  - Il faut chercher dans les commentaires comme par exemnple `//TODO`, `// TODO`, `/* TODO:`, etc.
 - Ne rien expliquer, le TODO.md doit contenir uniquement le tableau des `FIXME`, `TODO`, `XXX`.
 - Si le contexte contient un **DOCUMENT précédent** "## DOCUMENT précédent"
   - Mettre à jour le contenu markdown en effectuant une adaptation de la dernière génération.
@@ -14,17 +14,12 @@
 
 ## 📑 Format attendu
 
-Le document généré doit être en **Markdown** et suivre exactement cette structure :
+Le document généré doit être en **Markdown** et suivre cette structure :
 
 ```markdown
 # 📘 TODO
 
-| Fichier      | Type  | Description     |
-| ------------ | ----- | --------------- |
-| foo.js       | XXX   | Ceci : `toto()` |
-| lib/bar.js   | FIXME | Cela            |
-| lib/toto.js  | TODO  | Blabla          |
-| lib/blupi.js | TODO  | Etc.            |
+(Tableau avec les colonnes `Fichier`, `Type` et `Description`)
 ```
 
 ## Optimisation des tableaux pour GitHub
