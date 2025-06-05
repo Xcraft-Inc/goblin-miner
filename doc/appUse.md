@@ -81,8 +81,8 @@ Contiennent les instructions principales pour l'IA concernant le type de documen
 
 1. `doc/autogen/prompts/[nom-document].md` dans le module cible
 2. Ressources de l'application : `prompts/[type]/[nom-document].md`
-3. Module miner : `prompts/[type]/[nom-document].md`
-4. Fichier de base : `prompts/[type]/base.md`
+3. Module goblin-miner : `prompts/[type]/[nom-document].md`
+4. Fichier de base du goblin-miner : `prompts/[type]/base.md`
 
 **Instructions (`instructions/`)**
 
@@ -120,9 +120,8 @@ L'application applique automatiquement des filtres selon le type de projet :
 
 **Type `xcraft`** : Exclut automatiquement
 
-- Les fichiers non-JavaScript (sauf `package.json`)
+- Les fichiers non-JavaScript (sauf `package.json` et les fichiers dans `bin/`)
 - Les fichiers dans `node_modules`
-- Les fichiers dans le dossier `bin`
 - Les fichiers commençant par `eslint.`
 
 **Type `dotnet`** : Inclut uniquement
