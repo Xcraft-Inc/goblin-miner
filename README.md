@@ -174,17 +174,22 @@ class CodeMinerShape {
 
 #### Fonctions utilitaires
 
-**`loadPrompt(fileName)`** — Charge un prompt de base depuis le répertoire `lib/prompts/`.
+**`_load(libPath, kind, type, fileName, requiring)`** — Fonction utilitaire centrale qui charge des fichiers selon une hiérarchie de priorité :
 
-**`loadInstruction(libPath, type, fileName)`** — Charge les instructions spécifiques selon une hiérarchie de priorité :
-
-1. Module cible : `lib/[module]/doc/autogen/instructions/[fileName]`
+1. Module cible : `lib/[module]/doc/autogen/[kind]/[fileName]`
 2. Ressources de l'application : `resources/[fileName]`
-3. Module miner : `lib/goblin-miner/lib/instructions/[type]/[fileName]`
+3. Module miner : `lib/goblin-miner/lib/[kind]/[type]/[fileName]`
+4. Fichier de base : `lib/goblin-miner/lib/[kind]/[type]/base[extension]`
+
+**`loadPrompt(libPath, type, name)`** — Charge un prompt de base depuis le répertoire approprié en utilisant `_load()`.
+
+**`loadInstruction(libPath, type, name)`** — Charge les instructions spécifiques selon la hiérarchie de priorité.
+
+**`loadFilter(libPath, type, name)`** — Charge et exécute un filtre JavaScript pour personnaliser la sélection de fichiers.
 
 **`typeFilter(type, file)`** — Filtre les fichiers selon le type de projet :
 
-- **xcraft** : Exclut les fichiers non-JS, non-package.json, les node_modules et fichiers eslint
+- **xcraft** : Exclut les fichiers non-JS (sauf package.json et bin/), les node_modules et fichiers eslint
 - **dotnet** : Inclut uniquement les fichiers .cs, .csproj et .sln
 
 ### Processus de génération
@@ -237,8 +242,8 @@ service.js
 #### 3. Préparation du prompt
 
 Le système combine :
-- Un prompt de base (depuis `prompts/[type].md`)
-- Des instructions spécifiques (depuis `instructions/[type]/[instructFile]`)
+- Un prompt de base (depuis `prompts/[type]/[name].md`)
+- Des instructions spécifiques (depuis `instructions/[type]/[name].md`)
 - Le code source de tous les fichiers du module
 - La documentation précédente (si elle existe)
 
@@ -264,6 +269,10 @@ Le module utilise un système de redirection pour déterminer où sauvegarder la
    - Pour les autres fichiers : `lib/[module]/doc/[instructFile]`
 
 Cette fonctionnalité permet de maintenir la documentation directement dans le module source si souhaité.
+
+### Système de filtres personnalisés
+
+Le module supporte des filtres JavaScript personnalisés via `loadFilter()`. Ces filtres permettent de personnaliser la sélection de fichiers au-delà des règles de base définies par `typeFilter()`. Les filtres sont chargés selon la même hiérarchie de priorité que les prompts et instructions.
 
 ### Limitations et considérations
 
