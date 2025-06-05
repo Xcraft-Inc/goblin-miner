@@ -2,7 +2,6 @@
 
 - Décrire le **module** en détail, on doit comprendre à quoi il sert, comment il fonctionne, avec quoi il interagit, etc.
 - Lister et décrire toutes les variables d'environnement utilisées et/ou modifiées dans un tableau avec colonnes `Variable`, `Description`, `Exemple` et `Valeur par défaut`.
-- Lister et décrire tous les FIXME, TODO, XXX, etc. (qui sont sous la forme de commentaires dans le code) dans un tableau avec colonnes `Fichier`, `Ligne`, `Type` et `Description`.
 - Décrire chaque **acteur** (Elf) et son rôle dans le module.
 - Décrire chaque **widget** (React) avec un exemple basé sur ses propriétés.
 - Pour un **acteur** :
@@ -14,7 +13,7 @@
 - Fournir des **exemples d'utilisation** concrets avec des cas pratiques.
 - Documenter les fonctions et méthodes publiques avec leur signature, paramètres et valeurs de retour.
 - Conserver les liens hypertextes markdown sur les autres modules tant que le module cité est encore utilisé dans le projet. Préférer les liens avec référence en bas du document.
-- Si le contexte contient un **README précédent** "## README précédent"
+- Si le contexte contient un **DOCUMENT précédent** "## DOCUMENT précédent"
   - Mettre à jour le contenu markdown en effectuant une adaptation de la dernière génération.
   - Ajouter ce qui manque.
   - Supprimer ce qui n'existe plus.
@@ -23,7 +22,7 @@
 
 ## 📑 Format attendu
 
-Le README généré doit être en **Markdown** et suivre cette structure :
+Le document généré doit être en **Markdown** et suivre cette structure :
 
 ```markdown
 # 📘 Documentation du module
@@ -98,11 +97,6 @@ Liste à puces; pour chaque méthode, utiliser un format simple mais informatif 
 ### Fichiers spéciaux (workers, backends, etc.)
 
 (Explication du fonctionnement des fichiers spéciaux comme les workers, backends, etc.)
-
-### À faire, à corriger, ...
-
-(Présenter les TODO, FIXME, XXX, etc. (trouvés dans le code) sous forme de tableau avec colonnes `Fichier`, `Ligne`, `Type`, `Description`)
-(Ne pas insérer cette section si rien n'a été trouvé dans le code)
 ```
 
 ## Instructions spéciales pour les types de modules

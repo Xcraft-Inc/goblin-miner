@@ -13,7 +13,7 @@
   - Websocket (par ex. SignalR)
 - Déctecter les spécialités liée aux variables d'environnements
 - Conserver les liens hypertextes markdown sur les autres modules tant que le module cité est encore utilisé dans le projet. Préférer les liens avec référence en bas du document.
-- Si le contexte contient un **README précédent** "## README précédent"
+- Si le contexte contient un **DOCUMENT précédent** "## DOCUMENT précédent"
   - Mettre à jour le contenu markdown en effectuant une adaptation de la dernière génération.
   - Ajouter ce qui manque.
   - Supprimer ce qui n'existe plus.
@@ -22,7 +22,7 @@
 
 ## 📑 Format attendu
 
-Le README généré doit être en **Markdown** et suivre cette structure :
+Le document généré doit être en **Markdown** et suivre cette structure :
 
 ```markdown
 # App Flow

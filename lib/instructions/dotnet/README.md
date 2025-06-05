@@ -2,11 +2,10 @@
 
 - Décrire le **module** en détail, on doit comprendre à quoi il sert, comment il fonctionne, avec quoi il interagit, etc.
 - Lister et décrire toutes les variables d'environnement utilisées et/ou modifiées dans un tableau avec colonnes `Variable`, `Description`, `Exemple` et `Valeur par défaut`.
-- Lister et décrire tous les FIXME, TODO, XXX, etc. (qui sont sous la forme de commentaires dans le code) dans un tableau avec colonnes `Fichier`, `Ligne`, `Type` et `Description`.
 - Fournir des **exemples d'utilisation** concrets avec des cas pratiques.
 - Documenter les fonctions et méthodes publiques avec leur signature, paramètres et valeurs de retour.
 - Conserver les liens hypertextes markdown sur les autres modules tant que le module cité est encore utilisé dans le projet. Préférer les liens avec référence en bas du document.
-- Si le contexte contient un **README précédent** "## README précédent"
+- Si le contexte contient un **DOCUMENT précédent** "## DOCUMENT précédent"
   - Mettre à jour le contenu markdown en effectuant une adaptation de la dernière génération.
   - Ajouter ce qui manque.
   - Supprimer ce qui n'existe plus.
@@ -15,7 +14,7 @@
 
 ## 📑 Format attendu
 
-Le README généré doit être en **Markdown** et suivre cette structure :
+Le document généré doit être en **Markdown** et suivre cette structure :
 
 ```markdown
 # 📘 Documentation du module
@@ -55,11 +54,6 @@ Le README généré doit être en **Markdown** et suivre cette structure :
 Liste à puces; pour chaque méthode, utiliser un format simple mais informatif :
 
 - **`methodName(param1, param2=default)`** — Description détaillée de la méthode expliquant clairement son but, son fonctionnement et ses cas d'utilisation.
-
-### À faire, à corriger, ...
-
-(Présenter les TODO, FIXME, XXX, etc. (trouvés dans le code) sous forme de tableau avec colonnes `Fichier`, `Ligne`, `Type`, `Description`)
-(Ne pas insérer cette section si rien n'a été trouvé dans le code)
 ```
 
 ## Points d'attention particuliers
