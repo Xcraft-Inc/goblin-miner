@@ -55,10 +55,12 @@ Le document généré doit être en **Markdown** et suivre cette structure :
 ## Configuration avancée
 
 (Si un fichier config.js est présent, présenter son contenu sous forme de tableau avec colonnes `Option`, `Description`, `Type`, `Valeur par défaut`)
+(Enlever cette section s'il n'y a pas de configuration avancée)
 
 ### Variables d'environnement
 
 (Présenter sous forme de tableau avec colonnes `Variable`, `Description`, `Exemple`, `Valeur par défaut`)
+(Enlever cette section s'il n'y a pas de variables d'environnement)
 
 ## Détails des sources
 
@@ -84,7 +86,8 @@ Le document généré doit être en **Markdown** et suivre cette structure :
 
 Liste à puces; pour chaque méthode, utiliser un format simple mais informatif :
 
-- **`methodName(param1, param2=default)`** — Description détaillée de la méthode expliquant clairement son but, son fonctionnement et ses cas d'utilisation.
+- **`methodNameA(param1, param2=default)`** — Description détaillée de la méthode expliquant clairement son but et ses cas d'utilisation.
+- **`methodNameB(param1)`** — Idem.
 
 ### `autre.js`
 
