@@ -36,6 +36,7 @@ Le document généré doit être en **Markdown** et suivre cette structure :
 
 (Expliquer comment configurer le module cible pour exploiter des prompts personnalisés)
 (Ne pas donner d'explication sur la redirection de sortie `.redirect`)
+(Ne pas lister la configuration globale du module)
 
 ## Exemples
 

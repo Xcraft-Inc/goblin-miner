@@ -27,6 +27,27 @@ Spécifie le type de projet à analyser.
 - **Valeurs supportées** : `xcraft`, `dotnet`
 - **Par défaut** : `xcraft`
 
+### `-p, --provider`
+
+Fournisseur d'IA à utiliser.
+
+- **Par défaut** : `open-ai`
+- **Peut être surchargé** par la configuration du module
+
+### `-m, --model`
+
+Modèle d'IA à utiliser.
+
+- **Par défaut** : `anthropic/claude-sonnet-4`
+- **Peut être surchargé** par la configuration du module
+
+### `-H, --host`
+
+URL de l'hôte du fournisseur d'IA.
+
+- **Par défaut** : `https://openrouter.ai/api/v1`
+- **Peut être surchargé** par la configuration du module
+
 ### `-k, --authKey`
 
 Clé d'authentification pour le fournisseur d'IA.
@@ -47,7 +68,7 @@ Chemin vers le fichier de sortie pour la documentation générée.
 - **Format** : Chemin absolu vers le fichier de destination
 - **Par défaut** : Utilise la configuration du module
 
-## Configuration
+## Configurations
 
 ### Configuration par module
 
@@ -150,16 +171,22 @@ npx xcraft-miner@latest -t xcraft -k "votre-cle-api" -i "./lib/mon-module" -o ".
 npx xcraft-miner@latest -t dotnet -k "votre-cle-api" -i "/chemin/vers/projet" -o "/chemin/vers/documentation.md"
 ```
 
+### Utilisation avec un fournisseur personnalisé
+
+```bash
+npx xcraft-miner@latest -p "anthropic" -m "claude-3-sonnet" -H "https://api.anthropic.com" -k "votre-cle-api"
+```
+
+### Génération avec paramètres d'inférence
+
+```bash
+npx xcraft-miner@latest -k "votre-cle-api" -i "./lib/mon-module" -o "./doc/API.md"
+```
+
 ### Utilisation avec un chemin absolu
 
 ```bash
 npx xcraft-miner@latest -k "sk-..." -i "/home/user/projets/mon-module" -o "/home/user/docs/README.md"
-```
-
-### Génération de documentation API spécifique
-
-```bash
-npx xcraft-miner@latest -k "votre-cle-api" -i "./lib/mon-module" -o "./doc/API.md"
 ```
 
 L'application analyse automatiquement les fichiers source du module spécifié, applique les filtres configurés selon le type de projet, et génère une documentation complète en utilisant l'intelligence artificielle selon les prompts et instructions définis.
