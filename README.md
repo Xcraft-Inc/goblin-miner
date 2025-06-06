@@ -79,7 +79,12 @@ await codeMiner.generate('goblin-workshop', 'README.md');
 Le module supporte des arguments spéciaux via `xcraft-core-host` :
 
 - `-t` : Type de projet (par défaut 'xcraft')
+- `-p` : Fournisseur d'IA (par défaut 'open-ai')
+- `-m` : Modèle d'IA (par défaut 'anthropic/claude-sonnet-4')
+- `-H` : URL de l'hôte API (par défaut 'https://openrouter.ai/api/v1')
 - `-k` : Clé d'authentification
+- `-T` : Température d'inférence (par défaut 0.2)
+- `-s` : Graine pour la reproductibilité (par défaut 21121871)
 - `-i` : Chemin vers un module spécifique
 - `-o` : Chemin vers un fichier d'instruction spécifique
 
