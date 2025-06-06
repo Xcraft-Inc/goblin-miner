@@ -55,6 +55,20 @@ Clé d'authentification pour le fournisseur d'IA.
 
 - **Requis** : Oui (sauf si configuré dans le fichier de configuration)
 
+### `-T, --temperature`
+
+Contrôle la créativité de l'IA (valeur entre 0 et 1).
+
+- **Par défaut** : `0.2`
+- **Peut être surchargé** par la configuration du module
+
+### `-s, --seed`
+
+Graine pour la génération déterministe.
+
+- **Par défaut** : `21121871`
+- **Peut être surchargé** par la configuration du module
+
 ### `-i, --input`
 
 Chemin vers le module ou dossier source à analyser.
@@ -182,6 +196,12 @@ npx xcraft-miner@latest -p "open-ai" -m "anthropic/claude-3-sonnet" -H "https://
 
 ```bash
 npx xcraft-miner@latest -p "ollama" -m "llama3.2" -H "http://localhost:11434/v1" -k "dummy"
+```
+
+### Utilisation avec paramètres d'inférence personnalisés
+
+```bash
+npx xcraft-miner@latest -k "votre-cle-api" -T 0.7 -s 42 -i "./lib/mon-module"
 ```
 
 ### Utilisation avec un chemin absolu
