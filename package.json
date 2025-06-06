@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "fs-extra": "^9.1.0",
-    "goblin-agents": "^0.1.0",
+    "goblin-agents": "^1.0.0",
     "goblin-warehouse": "^4.2.9",
     "xcraft-core-etc": "^3.3.0",
     "xcraft-core-goblin": "^5.8.0",
