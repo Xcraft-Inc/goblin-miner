@@ -144,7 +144,6 @@ class AppMinerShape {
 #### Méthodes publiques
 
 - **`init()`** — Méthode d'initialisation principale qui orchestre tout le processus de génération de documentation. Elle charge la configuration depuis `xcraft-core-etc`, traite les arguments d'application via `xcraft-core-host`, crée une instance de `CodeMiner`, lance la génération pour tous les modules configurés en combinaison avec tous les fichiers d'instructions spécifiés, puis déclenche l'arrêt de l'application via `this.quest.cmd('shutdown')`.
-
 - **`main()`** — Méthode principale qui contient la logique de traitement. Elle gère la configuration, les arguments en ligne de commande, l'instanciation du CodeMiner et l'exécution de la génération de documentation pour chaque combinaison module/fichier d'instruction.
 
 ### `lib/codeMiner.js`
@@ -172,9 +171,7 @@ class CodeMinerShape {
 #### Méthodes publiques
 
 - **`create(id, desktopId, projectPath, type, provider, model, host, authKey, temperature, seed)`** — Initialise l'instance avec les paramètres d'IA et le chemin du projet. Configure l'agent d'IA avec les paramètres fournis et prépare l'instance pour la génération de documentation.
-
 - **`loadModule(module, instructFileName)`** — Charge et filtre les fichiers source d'un module selon les règles d'exclusion définies dans `.mignore`. Retourne la liste des fichiers à analyser en excluant automatiquement les `node_modules`, fichiers `eslint.*`, et autres fichiers non pertinents. Supporte les sections conditionnelles dans `.mignore` basées sur le fichier d'instruction.
-
 - **`generate(module, instructFile = 'README.md')`** — Génère la documentation pour un module spécifique. Combine les prompts de base, les instructions spécifiques, le code source et la documentation précédente (si elle existe) pour créer un prompt complet envoyé à l'agent d'IA.
 
 #### Fonctions utilitaires
@@ -187,11 +184,8 @@ class CodeMinerShape {
 4. Fichier de base : `lib/goblin-miner/lib/[kind]/[type]/base[extension]`
 
 **`loadPrompt(libPath, type, name)`** — Charge un prompt de base depuis le répertoire approprié en utilisant `_load()`.
-
 **`loadInstruction(libPath, type, name)`** — Charge les instructions spécifiques selon la hiérarchie de priorité.
-
 **`loadFilter(libPath, type, name)`** — Charge et exécute un filtre JavaScript pour personnaliser la sélection de fichiers.
-
 **`typeFilter(type, file)`** — Filtre les fichiers selon le type de projet :
 
 - **xcraft** : Exclut les fichiers non-JS (sauf package.json et bin/), les node_modules et fichiers eslint
@@ -204,16 +198,19 @@ class CodeMinerShape {
 Le `CodeMiner` analyse récursivement le répertoire du module et collecte les fichiers selon le type de projet :
 
 **Pour les projets Xcraft** :
+
 - Tous les fichiers `.js`
 - Le fichier `package.json`
 - Les fichiers dans les dossiers `bin/`
 
 **Pour les projets .NET** :
+
 - Fichiers `.cs`
 - Fichiers `.csproj`
 - Fichiers `.sln`
 
 **Exclusions automatiques** :
+
 - Dossiers `node_modules`
 - Fichiers commençant par `eslint.`
 - Fichiers listés dans `.mignore` (si présent)
@@ -239,6 +236,7 @@ service.js
 ```
 
 **Règles d'exclusion** :
+
 - Les lignes vides et les commentaires (commençant par `#`) sont ignorés
 - Les entrées sans slash final excluent des fichiers spécifiques
 - Les entrées avec slash final excluent des répertoires entiers
@@ -247,6 +245,7 @@ service.js
 #### 3. Préparation du prompt
 
 Le système combine :
+
 - Un prompt de base (depuis `prompts/[type]/[name].md`)
 - Des instructions spécifiques (depuis `instructions/[type]/[name].md`)
 - Le code source de tous les fichiers du module
@@ -259,6 +258,7 @@ Un agent d'IA (`AiAgent` de `goblin-agents`) analyse le prompt et génère la do
 #### 5. Sauvegarde
 
 La documentation générée est sauvegardée dans :
+
 - `doc/autogen/[module]/[instructFile]` (par défaut)
 - Ou `lib/[module]/[instructFile]` (si un fichier `.redirect` existe)
 - Ou le chemin absolu spécifié si `instructFile` est un chemin absolu
