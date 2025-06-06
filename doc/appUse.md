@@ -31,6 +31,7 @@ Spécifie le type de projet à analyser.
 
 Fournisseur d'IA à utiliser.
 
+- **Valeurs supportées** : `open-ai`, `ollama`
 - **Par défaut** : `open-ai`
 - **Peut être surchargé** par la configuration du module
 
@@ -174,13 +175,13 @@ npx xcraft-miner@latest -t dotnet -k "votre-cle-api" -i "/chemin/vers/projet" -o
 ### Utilisation avec un fournisseur personnalisé
 
 ```bash
-npx xcraft-miner@latest -p "anthropic" -m "claude-3-sonnet" -H "https://api.anthropic.com" -k "votre-cle-api"
+npx xcraft-miner@latest -p "open-ai" -m "anthropic/claude-3-sonnet" -H "https://api.anthropic.com" -k "votre-cle-api"
 ```
 
-### Génération avec paramètres d'inférence
+### Génération avec Ollama (local)
 
 ```bash
-npx xcraft-miner@latest -k "votre-cle-api" -i "./lib/mon-module" -o "./doc/API.md"
+npx xcraft-miner@latest -p "ollama" -m "llama3.2" -H "http://localhost:11434/v1" -k "dummy"
 ```
 
 ### Utilisation avec un chemin absolu
