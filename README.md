@@ -179,7 +179,7 @@ class CodeMinerShape {
 **`_load(libPath, kind, type, fileName, requiring)`** — Fonction utilitaire centrale qui charge des fichiers selon une hiérarchie de priorité :
 
 1. Module cible : `lib/[module]/doc/autogen/[kind]/[fileName]`
-2. Ressources de l'application : `resources/[fileName]`
+2. Ressources de l'application : `resources/[kind]/[type]/[fileName]`
 3. Module miner : `lib/goblin-miner/lib/[kind]/[type]/[fileName]`
 4. Fichier de base : `lib/goblin-miner/lib/[kind]/[type]/base[extension]`
 
