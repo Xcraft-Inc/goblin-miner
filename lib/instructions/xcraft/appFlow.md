@@ -1,24 +1,28 @@
 ## 🎯 Objectifs
 
-- Garder une vision haut-niveau de flux applicatif
-- Toujours fournir des diagrammes de séquence textuels (mermaid) si nécessaire
-- Ne détail pas les algorithmes avec des exemple de codes
-- Décrire le flux de démarrage de l'application
-  - Utilise des diagrammes si pertinant, sinon préfère une liste
-- Décrire les fonctionnalités de l'application de manière détaillée
-  - Descriptions de tous les acteurs et de leur rôle
-- Décrire les interactions avec l'utilisateur (popups, notifications, erreurs, ...)
-- Décrire les interactions avec des services externes :
+- Garder une **vision haut-niveau** du flux applicatif
+- Toujours fournir des **diagrammes de séquence textuels** (mermaid) si nécessaire
+- **Ne pas détailler** les algorithmes avec des exemples de code
+- **Décrire le flux de démarrage** de l'application
+- Utiliser des **diagrammes** si pertinents, sinon préférer une liste
+- **Décrire les fonctionnalités** de l'application de manière détaillée
+- **Descriptions de tous les acteurs** et de leur rôle
+- **Décrire les interactions avec l'utilisateur** (popups, notifications, erreurs, ...)
+- **Décrire les interactions avec des services externes** :
   - API REST
   - Websocket (par ex. SignalR)
-- Déctecter les spécialités liée aux variables d'environnements
-- Conserver les liens hypertextes markdown sur les autres modules tant que le module cité est encore utilisé dans le projet. Préférer les liens avec référence en bas du document.
-- Si le contexte contient un **DOCUMENT précédent** "## DOCUMENT précédent"
-  - Mettre à jour le contenu markdown en effectuant une adaptation de la dernière génération.
-  - Ajouter ce qui manque.
-  - Supprimer ce qui n'existe plus.
-  - Corriger ce qui a changé par rapport au code source.
-  - Indiquer au bas du document qu'il s'agit d'une mise à jour et sans spécifier de date.
+- **Détecter les spécialités** liées aux variables d'environnement
+- Conserver les **liens hypertextes markdown** sur les autres modules tant que le module cité est encore utilisé dans le projet. Préférer les liens avec référence en bas du document.
+
+### Mise à jour de documentation existante :
+
+Si le contexte contient un **DOCUMENT précédent** marqué "## DOCUMENT précédent" :
+
+- **Mettre à jour** le contenu markdown en effectuant une adaptation de la dernière génération
+- **Ajouter** ce qui manque
+- **Supprimer** ce qui n'existe plus
+- **Corriger** ce qui a changé par rapport au code source
+- **Indiquer** au bas du document qu'il s'agit d'une mise à jour (sans spécifier de date)
 
 ## 📑 Format attendu
 
@@ -45,7 +49,7 @@ Le document généré doit être en **Markdown** et suivre cette structure :
 
 ## Interactions avec des services externes
 
-(Comment ce module interagit avec le reste de l'écosystème (API Rest / Websocket etc ...))
+(Comment ce module interagit avec le reste de l'écosystème (API REST / Websocket etc ...))
 
 ### Variables d'environnement
 
@@ -60,10 +64,10 @@ Le document généré doit être en **Markdown** et suivre cette structure :
 
 ## Optimisation des tableaux pour GitHub
 
-Pour rendre les tableaux plus lisibles sur GitHub:
+Pour rendre les tableaux plus lisibles sur GitHub :
 
 1. **Éviter les tableaux pour les descriptions complexes** : Au lieu d'utiliser un tableau avec de nombreuses colonnes pour documenter les méthodes, opter pour une structure en liste avec des titres en gras.
 
-2. **Pour les tableaux de configuration**, limiter la largeur des descriptions en utilisant des phrases concises ou en divisant les longues descriptions sur plusieurs lignes.
+2. **Pour les tableaux de configuration** : Limiter la largeur des descriptions en utilisant des phrases concises ou en divisant les longues descriptions sur plusieurs lignes.
 
-3. **Pour les énumérations longues**, utiliser des listes à puces plutôt que d'énumérer dans une cellule de tableau.
+3. **Pour les énumérations longues** : Utiliser des listes à puces plutôt que d'énumérer dans une cellule de tableau.
