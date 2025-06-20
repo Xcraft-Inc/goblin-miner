@@ -1,4 +1,4 @@
-# 📘 Documentation du module goblin-miner
+# 📘 goblin-miner
 
 ## Aperçu
 
