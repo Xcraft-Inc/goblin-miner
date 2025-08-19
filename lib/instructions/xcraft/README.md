@@ -27,7 +27,6 @@ Si le contexte contient un **DOCUMENT précédent** marqué "## DOCUMENT précé
 - **Ajouter** ce qui manque
 - **Supprimer** ce qui n'existe plus
 - **Corriger** ce qui a changé par rapport au code source
-- **Indiquer** au bas du document qu'il s'agit d'une mise à jour (sans spécifier de date)
 
 ## 📑 Format attendu
 
@@ -109,6 +108,12 @@ Liste à puces ; pour chaque méthode, utiliser un format simple mais informatif
 ### Fichiers spéciaux (workers, backends, etc.)
 
 (Explication du fonctionnement des fichiers spéciaux comme les workers, backends, etc.)
+
+## Licence
+
+(Indiquer très succinctement quel licence est utilisée par ce module et utiliser un lien markdown sur le fichier LICENSE, exemple : Ce module est distribué sous [licence MIT](./LICENSE).)
+
+(Tout en bas du document, indiquer que le contenu est généré par IA, exemple : _Ce contenu a été généré par IA_)
 ```
 
 ## Instructions spéciales par type de module
