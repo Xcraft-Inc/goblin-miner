@@ -208,7 +208,7 @@ npx xcraft-miner@latest -t cxx -k "votre-cle-api" -i "/chemin/vers/projet" -o "R
 ### Traduction d'un document en anglais
 
 ```bash
-npx xcraft-miner@latest -t translate -k "votre-cle-api" -i "/chemin/vers/document.md" -o "README.md"
+npx xcraft-miner@latest -t translate -k "votre-cle-api" -i "/chemin/vers/README.md" -o "README.en.md"
 ```
 
 ### Utilisation avec un fournisseur personnalisé
