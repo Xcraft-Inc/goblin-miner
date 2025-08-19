@@ -2,7 +2,7 @@
 
 ## Aperçu
 
-Le module `goblin-miner` est un outil d'analyse et de génération automatique de documentation pour les projets Xcraft. Il utilise des modèles d'intelligence artificielle pour analyser le code source et produire une documentation technique détaillée au format Markdown pour les modules du projet.
+Le module `goblin-miner` est un outil d'analyse et de génération automatique de documentation pour les projets Xcraft. Il utilise des modèles d'intelligence artificielle pour analyser le code source et produire une documentation technique détaillée au format Markdown. Le module supporte également la traduction de documents existants.
 
 ## Sommaire
 
@@ -22,12 +22,18 @@ Le module expose deux acteurs Elf principaux :
 
 ## Fonctionnement global
 
-Le module fonctionne en deux étapes principales :
+Le module fonctionne en deux modes principaux :
+
+### Mode Documentation
 
 1. **Initialisation** : L'acteur `AppMiner` charge la configuration depuis `xcraft-core-etc` et initialise un `CodeMiner`
-2. **Génération** : Le `CodeMiner` analyse les fichiers source des modules spécifiés et génère la documentation en format Markdown
+2. **Analyse** : Le `CodeMiner` collecte les fichiers source des modules spécifiés en respectant les filtres et exclusions
+3. **Génération** : Un agent d'IA analyse le code et génère la documentation selon des prompts prédéfinis
+4. **Sauvegarde** : La documentation est sauvegardée au format Markdown dans le système de fichiers
 
-Le processus utilise un agent d'IA (via `goblin-agents`) pour analyser le code et générer la documentation selon des prompts prédéfinis.
+### Mode Traduction
+
+Le module peut également traduire des documents existants en utilisant des prompts spécialisés pour la traduction.
 
 ### Flux de données
 
@@ -36,7 +42,7 @@ Le processus utilise un agent d'IA (via `goblin-agents`) pour analyser le code e
 3. Pour chaque module configuré :
    - **loadModule()** collecte les fichiers source en respectant les exclusions
    - **generate()** combine prompts, instructions et code source
-   - L'agent d'IA génère la documentation
+   - L'agent d'IA génère la documentation ou effectue la traduction
    - Le résultat est sauvegardé dans le système de fichiers
 4. **AppMiner** déclenche l'arrêt de l'application une fois terminé
 
@@ -111,10 +117,6 @@ Le module supporte des arguments spéciaux via `xcraft-core-host` :
 | modules.doc           | Liste des modules à analyser                                   | array  | []                |
 | instructs.doc         | Noms des fichiers d'instructions spécifiques                   | array  | []                |
 
-### Variables d'environnement
-
-Aucune variable d'environnement n'est directement utilisée par ce module. La configuration se fait via `xcraft-core-etc`.
-
 ## Détails des sources
 
 ### `appMiner.js`
@@ -166,13 +168,19 @@ class CodeMinerShape {
 
 - `_projectPath` : Chemin vers le projet à analyser
 - `_agentDef` : Configuration de l'agent d'IA (provider, model, host, headers, options)
-- `_type` : Type de projet ('xcraft', 'dotnet', etc.)
+- `_type` : Type de projet ('xcraft', 'dotnet', 'cxx', 'json', 'translate')
 
 #### Méthodes publiques
 
 - **`create(id, desktopId, projectPath, type, provider, model, host, authKey, temperature, seed)`** — Initialise l'instance avec les paramètres d'IA et le chemin du projet. Configure l'agent d'IA avec les paramètres fournis et prépare l'instance pour la génération de documentation.
 - **`loadModule(module, instructFileName)`** — Charge et filtre les fichiers source d'un module selon les règles d'exclusion définies dans `.mignore`. Retourne la liste des fichiers à analyser en excluant automatiquement les `node_modules`, fichiers `eslint.*`, et autres fichiers non pertinents. Supporte les sections conditionnelles dans `.mignore` basées sur le fichier d'instruction.
-- **`generate(module, instructFile = 'README.md')`** — Génère la documentation pour un module spécifique. Combine les prompts de base, les instructions spécifiques, le code source et la documentation précédente (si elle existe) pour créer un prompt complet envoyé à l'agent d'IA.
+- **`generate(module, instructFile = 'README.md')`** — Génère la documentation pour un module spécifique ou effectue une traduction selon le type configuré. Combine les prompts de base, les instructions spécifiques, le code source et la documentation précédente (si elle existe) pour créer un prompt complet envoyé à l'agent d'IA.
+
+#### Méthodes privées
+
+- **`_generateDocumentation(module, instructFile)`** — Génère la documentation technique pour un module en analysant son code source.
+- **`_generateTranslation(module, instructFile)`** — Traduit un document existant en utilisant des prompts spécialisés pour la traduction.
+- **`_loadFinalPrompt(libPath, instructName)`** — Combine le prompt de base et les instructions spécifiques pour créer le prompt final.
 
 #### Fonctions utilitaires
 
@@ -184,36 +192,23 @@ class CodeMinerShape {
 4. Fichier de base : `lib/goblin-miner/lib/[kind]/[type]/base[extension]`
 
 **`loadPrompt(libPath, type, name)`** — Charge un prompt de base depuis le répertoire approprié en utilisant `_load()`.
+
 **`loadInstruction(libPath, type, name)`** — Charge les instructions spécifiques selon la hiérarchie de priorité.
+
 **`loadFilter(libPath, type, name)`** — Charge et exécute un filtre JavaScript pour personnaliser la sélection de fichiers.
+
 **`typeFilter(type, file)`** — Filtre les fichiers selon le type de projet :
 
-- **xcraft** : Exclut les fichiers non-JS (sauf package.json et bin/), les node_modules et fichiers eslint
-- **dotnet** : Inclut uniquement les fichiers .cs, .csproj et .sln
+- **json** : Inclut uniquement les fichiers `.json`
+- **xcraft** : Inclut les fichiers `.js`, `package.json` et les fichiers dans `bin/`, exclut `node_modules` et fichiers `eslint.*`
+- **dotnet** : Inclut uniquement les fichiers `.cs`, `.csproj` et `.sln`
+- **cxx** : Inclut les fichiers C/C++ (`.c`, `.cpp`, `.cxx`, `.h`, `.hxx`), `Makefile`, `CMakeLists.txt`, `.cxproj` et `.sln`
 
 ### Processus de génération
 
 #### 1. Chargement des fichiers source
 
-Le `CodeMiner` analyse récursivement le répertoire du module et collecte les fichiers selon le type de projet :
-
-**Pour les projets Xcraft** :
-
-- Tous les fichiers `.js`
-- Le fichier `package.json`
-- Les fichiers dans les dossiers `bin/`
-
-**Pour les projets .NET** :
-
-- Fichiers `.cs`
-- Fichiers `.csproj`
-- Fichiers `.sln`
-
-**Exclusions automatiques** :
-
-- Dossiers `node_modules`
-- Fichiers commençant par `eslint.`
-- Fichiers listés dans `.mignore` (si présent)
+Le `CodeMiner` analyse récursivement le répertoire du module et collecte les fichiers selon le type de projet configuré.
 
 #### 2. Gestion des exclusions (.mignore)
 
@@ -232,6 +227,9 @@ build/
 [README.md]
 service.js
 
+# Inclusions forcées (avec préfixe !)
+!doc.md
+
 # Les commentaires commencent par #
 ```
 
@@ -241,6 +239,7 @@ service.js
 - Les entrées sans slash final excluent des fichiers spécifiques
 - Les entrées avec slash final excluent des répertoires entiers
 - Les sections entre crochets `[filename]` permettent des exclusions conditionnelles selon le fichier d'instruction
+- Les entrées commençant par `!` forcent l'inclusion de fichiers spécifiques
 
 #### 3. Préparation du prompt
 
@@ -248,20 +247,25 @@ Le système combine :
 
 - Un prompt de base (depuis `prompts/[type]/[name].md`)
 - Des instructions spécifiques (depuis `instructions/[type]/[name].md`)
-- Le code source de tous les fichiers du module
-- La documentation précédente (si elle existe)
+- Le code source de tous les fichiers du module (pour la documentation)
+- Le contenu du document à traduire (pour la traduction)
+- La documentation précédente (si elle existe, pour la documentation)
 
 #### 4. Génération via IA
 
-Un agent d'IA (`AiAgent` de `goblin-agents`) analyse le prompt et génère la documentation en Markdown.
+Un agent d'IA (`AiAgent` de `goblin-agents`) analyse le prompt et génère la documentation en Markdown ou effectue la traduction.
 
 #### 5. Sauvegarde
 
-La documentation générée est sauvegardée dans :
+**Pour la documentation** :
 
 - `doc/autogen/[module]/[instructFile]` (par défaut)
 - Ou `lib/[module]/[instructFile]` (si un fichier `.redirect` existe)
 - Ou le chemin absolu spécifié si `instructFile` est un chemin absolu
+
+**Pour la traduction** :
+
+- Le fichier traduit est sauvegardé dans le même répertoire que le fichier source avec l'extension `.en.md`
 
 ### Gestion des chemins de sauvegarde
 
@@ -272,8 +276,6 @@ Le module utilise un système de redirection pour déterminer où sauvegarder la
 3. **Avec redirection** : Si un fichier `[name].redirect` existe dans `doc/autogen/[module]/`, la documentation est sauvegardée directement dans le module source :
    - Pour `README.*` : `lib/[module]/[instructFile]`
    - Pour les autres fichiers : `lib/[module]/doc/[instructFile]`
-
-Cette fonctionnalité permet de maintenir la documentation directement dans le module source si souhaité.
 
 ### Système de filtres personnalisés
 
@@ -288,9 +290,11 @@ Le module supporte des filtres JavaScript personnalisés via `loadFilter()`. Ces
 - La gestion des erreurs d'API d'IA n'est pas explicitement implémentée dans le code fourni
 - Le module dépend de `xcraft-core-host` pour obtenir le chemin du projet, ce qui le lie à l'environnement Xcraft
 
----
+## Licence
 
-_Cette documentation a été mise à jour automatiquement par goblin-miner._
+Ce module est distribué sous [licence MIT](./LICENSE).
+
+_Ce contenu a été généré par IA_
 
 [goblin-agents]: https://github.com/Xcraft-Inc/goblin-agents
 [goblin-warehouse]: https://github.com/Xcraft-Inc/goblin-warehouse
